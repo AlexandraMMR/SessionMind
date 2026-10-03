@@ -1,0 +1,43 @@
+﻿{
+    "session":  {
+                    "abbreviation":  "AIM104-R1",
+                    "abstract":  "In this session, get an overview of the generative AI capabilities of Amazon Q in QuickSight. Learn how analysts can build interactive dashboards rapidly, and discover how business users can use natural language to instantly create documents and presentations explaining data and extract insights beyond whatâs available in dashboards with data Q\u0026A and executive summaries. Learn how Amazon Q in QuickSight empowers every employee to perform advanced data analysis, without specialized skills and training, using scenarios. See it in action with a demo and get resources on how to get started. Find the express repeat of this chalk talk on the agenda.",
+                    "areasOfInterest":  [
+                                            "Business Intelligence",
+                                            "Generative AI",
+                                            "Innovation \u0026 Transformation"
+                                        ],
+                    "isAllDaySession":  false,
+                    "level":  "100 â Foundational",
+                    "roles":  [
+                                  "Business Executive"
+                              ],
+                    "room":  "Level 700, Room 714B",
+                    "services":  [
+                                     "Amazon Quicksight Q",
+                                     "Amazon Bedrock",
+                                     "Amazon QuickSight"
+                                 ],
+                    "sessionId":  "AIM104-R1",
+                    "sessionTime":  {
+                                        "date":  "2025-09-04",
+                                        "length":  "60",
+                                        "time":  "12:30",
+                                        "timezone":  "America/Toronto"
+                                    },
+                    "speakers":  [
+                                     {
+                                         "name":  "Yusra Al-Sharafi, AWS"
+                                     },
+                                     {
+                                         "name":  "Aline Shalita, AWS"
+                                     }
+                                 ],
+                    "title":  "Reimagine business intelligence with generative AI [REPEAT]",
+                    "topics":  [
+                                   "AI/ML",
+                                   "Analytics"
+                               ],
+                    "type":  "Chalk talk"
+                }
+}

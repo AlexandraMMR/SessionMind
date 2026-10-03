@@ -1,0 +1,28 @@
+# Node
+node_modules/
+dist/
+cdk.out/
+*.tsbuildinfo
+npm-debug.log*
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+build/
+cdk.out/
+
+# Demo script output artifacts
+scripts/output/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.pem
+tools/.token
+tools/.refresh_token

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SessionMind AI — Live Demo</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__inner">
+      <h1>SessionMind AI</h1>
+      <p class="app-header__subtitle">
+        Live demo against the real AWS Events API — no mocks, no fixtures.
+      </p>
+    </div>
+  </header>
+
+  <main class="layout" aria-label="SessionMind AI demo">
+    <!-- Step 1: pick a real, public event -->
+    <section class="panel" aria-labelledby="step1-heading">
+      <h2 id="step1-heading"><span class="step-badge">1</span> Choose a real event</h2>
+      <p class="panel__hint">
+        Calls the real <code>GET /v1/events</code> endpoint (no credentials needed) and lists
+        only events whose catalog is public — those are the only ones this demo can browse
+        without a Builder ID sign-in.
+      </p>
+      <div class="field-row">
+        <label for="event-select">Public AWS event</label>
+        <select id="event-select" aria-describedby="event-select-status">
+          <option value="">Loading real events…</option>
+        </select>
+        <button id="load-event-btn" type="button" class="btn btn--primary" disabled>
+          Load sessions
+        </button>
+      </div>
+      <p id="event-select-status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <div class="two-column">
+      <!-- Step 2: browse the real catalog -->
+      <section class="panel" aria-labelledby="step2-heading">
+        <h2 id="step2-heading"><span class="step-badge">2</span> Browse the real session catalog</h2>
+        <p class="panel__hint">
+          Real <code>ListSessions</code> results. Click a session for a real <code>GetSession</code>
+          call plus a live AWS Knowledge MCP lookup, or add it straight to "My Schedule" (this
+          demo's stand-in for <code>GetSchedule</code>, since public events have no schedule to
+          pull — see the README for why).
+        </p>
+        <label for="session-filter" class="visually-hidden">Filter sessions by title</label>
+        <input
+          id="session-filter"
+          type="search"
+          placeholder="Filter by title…"
+          class="text-input"
+          aria-controls="session-list"
+        />
+        <ul id="session-list" class="session-list" aria-label="Real sessions from the selected event"></ul>
+      </section>
+
+      <!-- Step 3: My Schedule -->
+      <section class="panel" aria-labelledby="step3-heading">
+        <h2 id="step3-heading"><span class="step-badge">3</span> My Schedule</h2>
+        <p class="panel__hint">
+          The real sessions you've added. This stands in for a real reservation list.
+        </p>
+        <ul id="schedule-list" class="session-list" aria-label="Your schedule"></ul>
+        <p id="schedule-empty" class="status">No sessions added yet.</p>
+      </section>
+    </div>
+
+    <!-- Step 4: notes -->
+    <section class="panel" aria-labelledby="step4-heading" id="notes-panel" hidden>
+      <h2 id="step4-heading"><span class="step-badge">4</span> Capture a note</h2>
+      <form id="note-form" class="note-form">
+        <div class="field-row">
+          <label for="note-session-select">Session</label>
+          <select id="note-session-select"></select>
+        </div>
+        <div class="field-row">
+          <label for="note-text">Your note</label>
+          <textarea id="note-text" rows="2" required placeholder="What stood out in this session?"></textarea>
+        </div>
+        <div class="field-row">
+          <label for="note-recording-url">Recording link (optional, you supply this — never auto-discovered)</label>
+          <input id="note-recording-url" type="url" placeholder="https://…" class="text-input" />
+        </div>
+        <button type="submit" class="btn btn--primary">Save note</button>
+      </form>
+      <h3>Notes so far</h3>
+      <ul id="notes-list" class="notes-list" aria-label="Captured notes"></ul>
+    </section>
+
+    <!-- Step 5: reports -->
+    <section class="panel" aria-labelledby="step5-heading" id="reports-panel" hidden>
+      <h2 id="step5-heading"><span class="step-badge">5</span> Generate reports from the same real data</h2>
+      <div class="field-row">
+        <label for="attendee-name">Your name (used in the generated drafts)</label>
+        <input id="attendee-name" type="text" class="text-input" value="Attendee" />
+      </div>
+      <div class="btn-row" role="group" aria-label="Report types">
+        <button type="button" class="btn" data-report="trip-report">Trip report</button>
+        <button type="button" class="btn" data-report="linkedin">LinkedIn draft</button>
+        <button type="button" class="btn" data-report="builder-center">Builder Center draft</button>
+      </div>
+      <div id="report-output" class="report-output" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <!-- Prep card dialog -->
+  <dialog id="prep-card-dialog" aria-labelledby="prep-card-title">
+    <h2 id="prep-card-title">Prep card</h2>
+    <p id="prep-card-status" class="status"></p>
+    <ol id="prep-card-bullets" class="prep-card-bullets"></ol>
+    <button type="button" id="prep-card-close" class="btn">Close</button>
+  </dialog>
+
+  <footer class="app-footer">
+    <p>
+      Every call above hits the real <code>api.awsevents.com</code> (and the official AWS
+      Knowledge MCP server for documentation grounding) live — open your browser's network tab to
+      see it. Source: <code>session-mind-ai/webapp/</code>.
+    </p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

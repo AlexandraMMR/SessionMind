@@ -1,0 +1,277 @@
+﻿[
+    {
+        "abbreviation":  "ACT001",
+        "abstract":  "Join us for an exclusive adrenaline-pumping Squid Game VR challenge inspired by the #1 Netflix series.\n\nYouâll enjoy a socially immersive competitive gaming experience that combines full-body motion capture and high-quality haptics to provide unprecedented realism and complete immersion!\n\nâ¢\tPlay your favorite games from the series, like âRed Light, Green Light,â and âRepeat Racer,â along with fun surprises.\nâ¢\tCompete for the top score and see whoâll be the last one standing!\nâ¢\tNetwork with technology innovators, peers, and industry experts\nâ¢\tEnjoy delicious food and beverages catered by Brasa Peruvian Kitchen\n\nURL: https://learn.fastly.com/fastly-aws-squid-games-toronto-2025.html",
+        "isAllDaySession":  false,
+        "level":  "No Level",
+        "room":  "Sandbox VR: 21 Wellesley St W #1, Toronto, ON M4Y 0G7, Canada",
+        "sessionId":  "ACT001",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "180",
+                            "time":  "18:00",
+                            "timezone":  "America/Toronto"
+                        },
+        "title":  "Fastly \u0026 AWS: The Squid Game VR Challenge",
+        "type":  "Community activities"
+    },
+    {
+        "abbreviation":  "AIM101-S",
+        "abstract":  "Discover how TELUS Digital helps clients transform their customer support operations through a strategic partnership with AWS Partner Zendesk, leveraging generative AI to create an innovative asynchronous messaging solution. This session dives deep into how the integration of AI-powered tools within digital and app channels leads to remarkable improvements in customer satisfaction, including a 5-point increase in First Contact Resolution and a 50% reduction in after-contact work time. The solution not only enables 24/7 customer support and enhanced operational agility during peak periods but also provides valuable data-driven insights for continued service optimization. This presentation is brought to you by TELUS, an AWS Partner.",
+        "areasOfInterest":  [
+                                "Generative AI",
+                                "AWS Partners"
+                            ],
+        "isAllDaySession":  false,
+        "level":  "100 â Foundational",
+        "room":  "Expo, AWS Partner Spotlight Lounge",
+        "sessionId":  "AIM101-S",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "15",
+                            "time":  "14:30",
+                            "timezone":  "America/Toronto"
+                        },
+        "speakers":  [
+                         {
+                             "name":  "Brianne Heisel, TELUS Digital"
+                         }
+                     ],
+        "title":  "Revolutionizing Customer Experience: The TELUS Digital Success Story (sponsored by TELUS Digital)",
+        "topics":  [
+                       "AI/ML",
+                       "Business Applications"
+                   ],
+        "type":  "Lightning talk"
+    },
+    {
+        "abbreviation":  "AIM102-S",
+        "abstract":  "Most AI initiatives stall before they show any valueâor worse, generate massive cloud bills without delivering ROI. In this session, CGI shares how technical leaders can set up AI efforts for success from day one. Weâll walk through our AI Lab accelerator, built for rapid experimentation and responsible implementation, with governance, risk controls, and standards that get you to production faster.\n \nThen weâll dive into a real-world case where our FinOps model helped a client cut $2 millionânearly 50%âfrom their cloud spend by applying a structured approach to cost governance and financial accountability. In particular, weâll explore how FinOps plays a critical role in managing the financial risks commonly associated with high-performance GPU workloads that power AI. From tagging strategies and usage forecasting to automated anomaly detection and chargeback models, youâll see how CGI helps clients stay in control while scaling AI responsibly.\n \nWhether you\u0027re just getting started or already scaling, this session will help you move faster, spend smarter, and adopt better. This presentation is brought to you by CGI Inc., an AWS Partner.",
+        "areasOfInterest":  [
+                                "Cost Optimization",
+                                "Generative AI",
+                                "Monitoring \u0026 Observability"
+                            ],
+        "industries":  [
+                           "Cross-Industry Solutions",
+                           "Financial Services",
+                           "Professional Services"
+                       ],
+        "isAllDaySession":  false,
+        "level":  "100 â Foundational",
+        "roles":  [
+                      "IT Professional / Technical Manager",
+                      "Data Scientist"
+                  ],
+        "room":  "Expo, Athena Theater",
+        "services":  [
+                         "Amazon Bedrock",
+                         "Amazon CloudWatch"
+                     ],
+        "sessionId":  "AIM102-S",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "30",
+                            "time":  "12:30",
+                            "timezone":  "America/Toronto"
+                        },
+        "speakers":  [
+                         {
+                             "name":  "Scott Stanley, CGI Inc."
+                         },
+                         {
+                             "name":  "Karandeep Singh, CGI Inc."
+                         }
+                     ],
+        "title":  "AI That Pays Off: Starting Smart, Scaling Right and Optimizing Costs (sponsored by CGI Inc.)",
+        "topics":  [
+                       "AI/ML",
+                       "Analytics",
+                       "Management \u0026 Governance"
+                   ],
+        "type":  "Lightning talk"
+    },
+    {
+        "abbreviation":  "AIM103",
+        "abstract":  "More global leaders like Bundesliga and Trellix are taking their generative AI applications to production and realizing business impact through increased innovation, productivity, and cost savings. How are they achieving these benefits and what are the key priorities that are critical for success? Through training, professional services experts, and comprehensive generative AI offerings, AWS provides trusted guidance and tools for customers to scale with confidence. In this session, learn how services and models like Amazon Nova, Amazon Bedrock, and Amazon Q are delivering business value across use cases to enhance customer engagement and boost employee productivity.",
+        "areasOfInterest":  [
+                                "Generative AI",
+                                "Responsible AI",
+                                "Innovation on AWS"
+                            ],
+        "industries":  [
+                           "Cross-Industry Solutions"
+                       ],
+        "isAllDaySession":  false,
+        "level":  "100 â Foundational",
+        "roles":  [
+                      "Business Executive",
+                      "IT Executive",
+                      "IT Professional / Technical Manager"
+                  ],
+        "room":  "Level 800, Hall D - Red Silent Stage",
+        "sessionId":  "AIM103",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "60",
+                            "time":  "14:30",
+                            "timezone":  "America/Toronto"
+                        },
+        "speakers":  [
+                         {
+                             "name":  "Shaown Nandi, AWS"
+                         }
+                     ],
+        "title":  "AI in action: From POC to business value",
+        "topics":  [
+                       "AI/ML"
+                   ],
+        "type":  "Breakout session"
+    },
+    {
+        "abbreviation":  "AIM104-R",
+        "abstract":  "In this session, get an overview of the generative AI capabilities of Amazon Q in QuickSight. Learn how analysts can build interactive dashboards rapidly, and discover how business users can use natural language to instantly create documents and presentations explaining data and extract insights beyond whatâs available in dashboards with data Q\u0026A and executive summaries. Learn how Amazon Q in QuickSight empowers every employee to perform advanced data analysis, without specialized skills and training, using scenarios. See it in action with a demo and get resources on how to get started. This is a 30-min express repeat session of a chalk talk.",
+        "areasOfInterest":  [
+                                "Business Intelligence",
+                                "Generative AI",
+                                "Innovation \u0026 Transformation"
+                            ],
+        "isAllDaySession":  false,
+        "level":  "100 â Foundational",
+        "roles":  [
+                      "Business Executive"
+                  ],
+        "room":  "Expo, AWS Village",
+        "services":  [
+                         "Amazon Quicksight Q",
+                         "Amazon Bedrock",
+                         "Amazon QuickSight"
+                     ],
+        "sessionId":  "AIM104-R",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "30",
+                            "time":  "10:00",
+                            "timezone":  "America/Toronto"
+                        },
+        "speakers":  [
+                         {
+                             "name":  "Aline Shalita, AWS"
+                         }
+                     ],
+        "title":  "Reimagine business intelligence with generative AI [EXPRESS REPEAT]",
+        "topics":  [
+                       "AI/ML",
+                       "Analytics"
+                   ],
+        "type":  "Chalk talk"
+    },
+    {
+        "abbreviation":  "AIM104-R1",
+        "abstract":  "In this session, get an overview of the generative AI capabilities of Amazon Q in QuickSight. Learn how analysts can build interactive dashboards rapidly, and discover how business users can use natural language to instantly create documents and presentations explaining data and extract insights beyond whatâs available in dashboards with data Q\u0026A and executive summaries. Learn how Amazon Q in QuickSight empowers every employee to perform advanced data analysis, without specialized skills and training, using scenarios. See it in action with a demo and get resources on how to get started. Find the express repeat of this chalk talk on the agenda.",
+        "areasOfInterest":  [
+                                "Business Intelligence",
+                                "Generative AI",
+                                "Innovation \u0026 Transformation"
+                            ],
+        "isAllDaySession":  false,
+        "level":  "100 â Foundational",
+        "roles":  [
+                      "Business Executive"
+                  ],
+        "room":  "Level 700, Room 714B",
+        "services":  [
+                         "Amazon Quicksight Q",
+                         "Amazon Bedrock",
+                         "Amazon QuickSight"
+                     ],
+        "sessionId":  "AIM104-R1",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "60",
+                            "time":  "12:30",
+                            "timezone":  "America/Toronto"
+                        },
+        "speakers":  [
+                         {
+                             "name":  "Yusra Al-Sharafi, AWS"
+                         },
+                         {
+                             "name":  "Aline Shalita, AWS"
+                         }
+                     ],
+        "title":  "Reimagine business intelligence with generative AI [REPEAT]",
+        "topics":  [
+                       "AI/ML",
+                       "Analytics"
+                   ],
+        "type":  "Chalk talk"
+    },
+    {
+        "abbreviation":  "AIM105-S",
+        "abstract":  "Think single AI agents are all the rage? Wait until they evolve into agent swarms--distributed, autonomous, coordinated, and ephemeral systems--pushing machine intelligence to new heights. This session demystifies what agents and swarms are, explains why they matter, and reveals how to manage and govern them. Weâll show you how to unify data from multiple silos, orchestrate tooling and governance, and navigate complex multi-cloud environments. The goal? Understand and prepare for the age of agents. This presentation is brought to you by Boomi, an AWS Partner.",
+        "areasOfInterest":  [
+                                "AWS Partners",
+                                "Generative AI",
+                                "Responsible AI"
+                            ],
+        "isAllDaySession":  false,
+        "level":  "100 â Foundational",
+        "room":  "Expo, AWS Partner Spotlight Lounge",
+        "sessionId":  "AIM105-S",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "15",
+                            "time":  "15:30",
+                            "timezone":  "America/Toronto"
+                        },
+        "speakers":  [
+                         {
+                             "name":  "Patricia Moore, Boomi"
+                         }
+                     ],
+        "title":  "Agent Swarms: What They Are, Why They Matter, and How to Contain Them (sponsored by Boomi)",
+        "topics":  [
+                       "AI/ML"
+                   ],
+        "type":  "Lightning talk"
+    },
+    {
+        "abbreviation":  "AIM201-S",
+        "abstract":  "The landscape of application development has transformed over the past two decades, shifting from monolithic architectures to complex, distributed, non-deterministic systems. This evolution impacts not only building and deployment but also observability and monitoring.\n\nIn this talk, we\u0027ll dive into the complexities of a modern application stack, discussing goals for modernization and alignment with frameworks such as AWS Well-Architected. We\u0027ll also explore how AI and Large Language Models are redefining observability through anomaly detection, predictive analytics, and AI-driven root cause analysis.\n\nJoin us as we connect the dots between application modernization practices and observability challenges. This presentation is brought to you by Datadog, an AWS Partner.",
+        "areasOfInterest":  [
+                                "Monitoring \u0026 Observability",
+                                "Modernization"
+                            ],
+        "industries":  [
+                           "Cross-Industry Solutions",
+                           "Software \u0026 Internet"
+                       ],
+        "isAllDaySession":  false,
+        "level":  "200 â Intermediate",
+        "roles":  [
+                      "Developer / Engineer",
+                      "DevOps Engineer",
+                      "Solution / Systems Architect"
+                  ],
+        "room":  "Level 800, Hall D - Blue Silent Stage",
+        "sessionId":  "AIM201-S",
+        "sessionTime":  {
+                            "date":  "2025-09-04",
+                            "length":  "60",
+                            "time":  "13:00",
+                            "timezone":  "America/Toronto"
+                        },
+        "speakers":  [
+                         {
+                             "name":  "Kunal Batra, Datadog"
+                         }
+                     ],
+        "title":  "Observability for Your AWS Modernization Journey (sponsored by Datadog)",
+        "topics":  [
+                       "AI/ML",
+                       "Migration \u0026 Modernization"
+                   ],
+        "type":  "Breakout session"
+    }
+]
