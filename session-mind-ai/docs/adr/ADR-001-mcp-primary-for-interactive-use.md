@@ -1,4 +1,4 @@
-# ADR-001 — MCP as the primary interactive surface, REST for the unattended worker
+# ADR-001: MCP as the primary interactive surface, REST for the unattended worker
 
 **Status:** Accepted
 
@@ -6,7 +6,7 @@
 
 SessionMind has two very different usage modes: (1) an unattended, scheduled background job that
 must run without a human approving a sign-in prompt, and (2) an inherently conversational
-experience — asking for a briefing, jotting a note, requesting a trip report — that maps
+experience, such as asking for a briefing, jotting a note, or requesting a trip report, that maps
 naturally onto an agent's tool-calling loop. The AWS Events API's MCP server requires an
 interactive OAuth sign-in on every call, which is fine for mode (2) but disqualifies it for mode
 (1).
@@ -17,8 +17,9 @@ Split the implementation along that boundary instead of picking one surface for 
 
 - The periodic briefing worker (`briefing_worker.py`, Lambda + EventBridge) uses the **REST**
   client (`events_api_client.py`) with a stored bearer token, because it must run unattended.
-- Everything else — fetching schedule/session details on demand, recording notes, generating a
-  trip report — is exposed as a **custom MCP server** (`mcp_server.py`) for use by an interactive
+- Everything else, including fetching schedule/session details on demand, recording notes, and
+  generating a trip report, is exposed as a **custom MCP server** (`mcp_server.py`) for use by
+  an interactive
   agent client. That server itself uses the same REST client under the hood; it does not
   reimplement Events API auth or proxy the official MCP server.
 
@@ -28,7 +29,8 @@ Split the implementation along that boundary instead of picking one surface for 
 - The unattended path never blocks on a browser prompt.
 - The interactive path gets a natural tool-calling interface matching how a user would actually
   ask for a briefing or a trip report ("summarize my re:Invent week").
-- A single REST client implementation is shared by both paths — no duplicated Events API logic.
+- A single REST client implementation is shared by both paths, so there is no duplicated Events
+  API logic.
 
 **Negative:**
 - Two runtime entry points (Lambda handler, MCP stdio server) means two things to keep in sync

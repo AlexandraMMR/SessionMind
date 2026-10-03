@@ -97,6 +97,26 @@ class TestBuilderCenterDraft:
         assert "Intro to S3" in draft
         assert "Keynote" in draft
 
+    def test_includes_abstract_for_untouched_sessions_too(self):
+        # s2 ("Intro to S3") has no abstract, s3 ("Keynote") has no abstract
+        # either in make_sessions(), so give one of them a real abstract to
+        # confirm it surfaces in the "Also on the agenda" section, not just
+        # the attended-sessions section above it.
+        sessions = make_sessions()
+        sessions[1].abstract = "A practical tour of S3 storage classes and lifecycle rules."
+        sections = build_trip_report_sections(sessions, make_notes())
+        draft = build_builder_center_draft(sections)
+        agenda_section = draft.split("## Also on the agenda", 1)[1]
+        assert "A practical tour of S3 storage classes and lifecycle rules." in agenda_section
+
+    def test_untouched_session_with_no_abstract_still_renders_title_only(self):
+        sections = build_trip_report_sections(make_sessions(), make_notes())
+        draft = build_builder_center_draft(sections)
+        agenda_section = draft.split("## Also on the agenda", 1)[1]
+        # "Keynote" has no abstract in make_sessions(); it should still list
+        # cleanly as a title-only bullet, no crash, no blank abstract line.
+        assert "- **Keynote**" in agenda_section
+
     def test_includes_recording_link_when_present(self):
         notes = [
             Note(session_id="s1", text="Great talk.", author="me", created_at=1, recording_url="https://example.com/video"),

@@ -1,4 +1,4 @@
-# SessionMind AI — Product Requirements Document
+# SessionMind AI, Product Requirements Document
 
 ## 1. Objective & target audience
 
@@ -29,11 +29,11 @@ learnings and present trip reports to stakeholders.
 
 The original draft assumed tools named `get_user_schedule`, `get_session_details`,
 `get_speaker_profile`, and `aws_knowledge_search`. The real AWS Events API has **no**
-`get_speaker_profile` operation — a session's `speakers` field is just a list of names, with no
+`get_speaker_profile` operation. A session's `speakers` field is just a list of names, with no
 dedicated speaker-profile endpoint. It also does not expose "prerequisite" fields directly; we
 derive prep-card content from `topics`/`tracks`/`abstract` instead. The AWS Knowledge MCP server
 is a distinct, already-existing public server (`https://knowledge-mcp.global.api.aws`) with its
-own `search_documentation` tool — we call it directly rather than re-implementing it.
+own `search_documentation` tool. We call it directly rather than re-implementing it.
 
 ## 5. Scope
 
@@ -47,10 +47,10 @@ own `search_documentation` tool — we call it directly rather than re-implement
   summary, sorted so sessions with notes surface first.
 
 **Out of scope:**
-- Actual push/mobile notification delivery beyond publishing to SNS (a subscriber — email, SMS,
-  mobile push via a further integration — is left to the deployer).
+- Actual push/mobile notification delivery beyond publishing to SNS. A subscriber such as email,
+  SMS, or mobile push via a further integration is left to the deployer.
 - PDF rendering (Markdown is produced; PDF conversion is a presentation-layer concern outside this
   module's scope).
-- A hosted, multi-tenant notes database with per-user isolation — the reference implementation
-  uses one collection; a production multi-attendee deployment would need per-attendee partitioning
-  which is flagged, not built, here.
+- A hosted, multi-tenant notes database with per-user isolation. The reference implementation
+  uses one collection; a production multi-attendee deployment would need per-attendee
+  partitioning, which is flagged, not built, here.

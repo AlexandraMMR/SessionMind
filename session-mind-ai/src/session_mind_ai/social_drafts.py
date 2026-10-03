@@ -96,7 +96,7 @@ def build_linkedin_draft(
         for section in attended[:5]:  # keep the post skimmable
             note_text = _first_note_text(section)
             if note_text:
-                lines.append(f"🔹 {section.session.title} — {note_text}")
+                lines.append(f"🔹 {section.session.title}: {note_text}")
             else:
                 lines.append(f"🔹 {section.session.title}")
         lines.append("")
@@ -125,7 +125,7 @@ def build_builder_center_draft(
     data as the trip report, reformatted for a blog audience rather than a
     personal recap."""
     attended = _attended_sections(sections)
-    untouched = [s.session.title for s in sections if not s.notes]
+    untouched = [s for s in sections if not s.notes]
     hashtags = _collect_hashtags(sections)
 
     lines: list[str] = []
@@ -160,8 +160,11 @@ def build_builder_center_draft(
             "exploring similar topics:"
         )
         lines.append("")
-        for title in untouched:
-            lines.append(f"- {title}")
+        for section in untouched:
+            s = section.session
+            lines.append(f"- **{s.title}**")
+            if s.abstract:
+                lines.append(f"  {s.abstract.strip()}")
         lines.append("")
 
     lines.append("## Closing thoughts")

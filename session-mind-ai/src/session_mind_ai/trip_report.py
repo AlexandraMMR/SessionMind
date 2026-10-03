@@ -41,7 +41,7 @@ def build_trip_report_sections(sessions: list[Session], notes: list[Note]) -> li
 
 
 def render_markdown(sections: list[TripReportSection], attendee_name: str = "Attendee") -> str:
-    lines = [f"# re:Invent Trip Report — {attendee_name}", ""]
+    lines = [f"# re:Invent Trip Report: {attendee_name}", ""]
     attended = [s for s in sections if s.notes]
     lines.append(f"**Sessions with captured notes:** {len(attended)} of {len(sections)} reserved sessions.")
     lines.append("")
@@ -79,11 +79,15 @@ def render_markdown(sections: list[TripReportSection], attendee_name: str = "Att
                 lines.append(f"- {url}")
             lines.append("")
 
-    untouched = [s.session.title for s in sections if not s.notes]
+    untouched = [s for s in sections if not s.notes]
     if untouched:
         lines.append("## Reserved but no notes captured")
-        for title in untouched:
-            lines.append(f"- {title}")
+        lines.append("")
+        for section in untouched:
+            s = section.session
+            lines.append(f"- **{s.title}**")
+            if s.abstract:
+                lines.append(f"  {s.abstract.strip()}")
         lines.append("")
 
     return "\n".join(lines).strip() + "\n"

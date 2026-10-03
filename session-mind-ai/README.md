@@ -13,7 +13,7 @@ Docs: [PRD](docs/prd.md) · [HLDD](docs/hldd.md) · [ADR-001 (MCP-primary for in
 - Generates a Markdown trip report aggregating notes with official session metadata, on request.
 - Drafts a LinkedIn post and an AWS Builder Center blog post from the same real sessions + notes
   (`generate_linkedin_draft` / `generate_builder_center_draft`), with editable placeholders left
-  wherever the attendee's own voice is required — never a fabricated opinion or outcome metric.
+  wherever the attendee's own voice is required. Never a fabricated opinion or outcome metric.
 - Ships a small visual browser demo (`webapp/`) and a terminal demo (`scripts/demo.py`), both
   driving the exact same real logic above against a live, public AWS event catalog.
 
@@ -54,23 +54,23 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m uvicorn webapp.server:app --reload
 ```
 
-Then open **http://127.0.0.1:8000**. This is a small FastAPI + vanilla-JS single-page app that
+Then open **http://127.0.0.1:8000**. This is a small FastAPI and vanilla JS single-page app that
 drives the exact same real modules as everything else in this repo (`events_api_client`,
-`briefing`, `trip_report`, `social_drafts`) — nothing in `webapp/` reimplements or mocks the
-underlying logic, it's a UI on top of it, built so the demo is recordable as a browser
+`briefing`, `trip_report`, `social_drafts`). Nothing in `webapp/` reimplements or mocks the
+underlying logic; it's a UI on top of it, built so the demo is recordable as a browser
 walkthrough instead of scrolling terminal output:
 
 1. Pick a real, public AWS event (real `ListEvents`, filtered to events that don't require
    registration).
 2. Browse its real session catalog (real `ListSessions`) and view a prep card for any session
    (real `GetSession` + a live AWS Knowledge MCP lookup).
-3. Add real sessions to "My Schedule" — a manual stand-in for `GetSchedule`, since a public event
+3. Add real sessions to "My Schedule", a manual stand-in for `GetSchedule`, since a public event
    has no schedule to pull in the first place (same constraint as the CLI demo, see below).
 4. Capture notes bound to real session IDs, optionally with a recording link you supply yourself.
 5. Generate a trip report, LinkedIn draft, and Builder Center draft from that same real data.
 
 Per-browser state (selected event, schedule, notes) lives server-side in memory, keyed by a
-cookie — restarting the server clears it, and it's not meant for multi-machine use; see
+cookie. Restarting the server clears it, and it's not meant for multi-machine use; see
 `webapp/server.py`'s module docstring for the full design rationale.
 
 ## CLI demo (terminal, no registration required)
@@ -82,7 +82,7 @@ cookie — restarting the server clears it, and it's not meant for multi-machine
 The original terminal walkthrough, still available. Runs against a REAL, public catalog
 (`Summit-Toronto-2025` by default; pass another event ID as an argument): real `GetSession` calls,
 a real query to the AWS Knowledge MCP server for grounding docs, real prep-card generation, real
-note capture, a real Markdown trip report, and a real LinkedIn + Builder Center draft — all over
+note capture, a real Markdown trip report, and a real LinkedIn and Builder Center draft, all over
 the notes just recorded, each written to a timestamped `.md` file under `scripts/output/`
 (gitignored) in addition to printing it.
 
@@ -134,14 +134,24 @@ This deploys an SNS topic for briefing cards, an EventBridge-triggered Lambda wo
 the `session_mind_ai` package via a Lambda-compatible `pip install` at synth time), and an Amazon
 OpenSearch Serverless collection with encryption/network/data-access policies for note storage.
 
+## Future iteration ideas
+
+- **Bedrock-backed drafting.** `build_linkedin_draft`/`build_builder_center_draft` are
+  deterministic and template-based today, by design: no LLM call, fully unit-testable without
+  AWS credentials. A natural next step is an optional pass through Amazon Bedrock that takes the
+  same real inputs (session abstracts, taxonomy, and the attendee's own notes) and rewrites them
+  into more natural prose, while still never inventing an opinion, outcome metric, or recording
+  link the attendee didn't provide. This would sit alongside the current template output rather
+  than replace it, so the deterministic version stays available as a fallback and for tests.
+
 ## Security notes
 
 - The Secrets Manager secret (`session-mind-ai/events-api-token`) must be populated manually after
-  completing the Builder ID OAuth flow — it is created empty by the stack.
+  completing the Builder ID OAuth flow. It is created empty by the stack.
 - `OpenSearchNotesStore` currently grants the briefing worker's role broad `aoss:APIAccessAll` on
   the collection; this should be scoped down to the specific index actions actually needed before
   any production use.
 - No authentication/authorization is implemented on who can call `record_session_note` or
-  `generate_trip_report` via the MCP server — it is designed for single-attendee local use. A
+  `generate_trip_report` via the MCP server; it is designed for single-attendee local use. A
   multi-tenant deployment needs per-attendee identity and data isolation, which is explicitly out
   of scope (see PRD).

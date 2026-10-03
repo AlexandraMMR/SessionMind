@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SessionMind AI — Live Demo</title>
+  <title>SessionMind AI: Live Demo</title>
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
@@ -11,7 +11,7 @@
     <div class="app-header__inner">
       <h1>SessionMind AI</h1>
       <p class="app-header__subtitle">
-        Live demo against the real AWS Events API — no mocks, no fixtures.
+        Live demo against the real AWS Events API. No mocks, no fixtures.
       </p>
     </div>
   </header>
@@ -22,7 +22,7 @@
       <h2 id="step1-heading"><span class="step-badge">1</span> Choose a real event</h2>
       <p class="panel__hint">
         Calls the real <code>GET /v1/events</code> endpoint (no credentials needed) and lists
-        only events whose catalog is public — those are the only ones this demo can browse
+        only events whose catalog is public. Those are the only ones this demo can browse
         without a Builder ID sign-in.
       </p>
       <div class="field-row">
@@ -45,7 +45,7 @@
           Real <code>ListSessions</code> results. Click a session for a real <code>GetSession</code>
           call plus a live AWS Knowledge MCP lookup, or add it straight to "My Schedule" (this
           demo's stand-in for <code>GetSchedule</code>, since public events have no schedule to
-          pull — see the README for why).
+          pull; see the README for why).
         </p>
         <label for="session-filter" class="visually-hidden">Filter sessions by title</label>
         <input
@@ -82,7 +82,7 @@
           <textarea id="note-text" rows="2" required placeholder="What stood out in this session?"></textarea>
         </div>
         <div class="field-row">
-          <label for="note-recording-url">Recording link (optional, you supply this — never auto-discovered)</label>
+          <label for="note-recording-url">Recording link, optional, you supply this; it is never auto-discovered</label>
           <input id="note-recording-url" type="url" placeholder="https://…" class="text-input" />
         </div>
         <button type="submit" class="btn btn--primary">Save note</button>
@@ -118,7 +118,7 @@
   <footer class="app-footer">
     <p>
       Every call above hits the real <code>api.awsevents.com</code> (and the official AWS
-      Knowledge MCP server for documentation grounding) live — open your browser's network tab to
+      Knowledge MCP server for documentation grounding) live. Open your browser's network tab to
       see it. Source: <code>session-mind-ai/webapp/</code>.
     </p>
   </footer>

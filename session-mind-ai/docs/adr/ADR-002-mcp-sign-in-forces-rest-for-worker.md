@@ -1,4 +1,4 @@
-# ADR-002 — Model Context Protocol integration for reasoning, REST for the unattended worker
+# ADR-002: Model Context Protocol integration for reasoning, REST for the unattended worker
 
 **Status:** Accepted
 
@@ -21,14 +21,14 @@ Lambda that must run with nobody watching.
    documentation search.
 2. For the Events API itself: use the REST surface with a stored bearer token for the unattended
    worker (see ADR-001). Reserve the Events API's own MCP server for scenarios where a human is
-   already present and signed in via their agent client (Kiro, Claude Code, etc.) — SessionMind's
+   already present and signed in via their agent client (Kiro, Claude Code, etc.). SessionMind's
    custom MCP server calls the *REST* client, not the official Events API MCP server, to avoid a
    double sign-in dependency.
 
 ## Consequences
 
 **Positive:**
-- Zero custom code needed to search AWS documentation — the official Knowledge server already
+- Zero custom code needed to search AWS documentation. The official Knowledge server already
   does this well, is publicly reachable with no credentials, and is maintained by AWS.
 - No token/auth management needed for the documentation lookup at all (it's unauthenticated).
 - The unattended worker has a single, well-understood auth dependency (one Events API bearer
@@ -38,7 +38,7 @@ Lambda that must run with nobody watching.
 - The worker's briefing quality depends on the Knowledge server's availability and relevance
   matching; `knowledge_client.search_documentation` swallows all errors and returns `[]` on
   failure, so an outage silently produces a briefing with a generic "no related docs found" line
-  rather than blocking the whole run — a deliberate degrade-gracefully choice, but it means a
-  Knowledge server outage is not loudly surfaced without checking logs.
+  rather than blocking the whole run. This is a deliberate degrade-gracefully choice, but it means
+  a Knowledge server outage is not loudly surfaced without checking logs.
 - `search_documentation`'s topic-based relevance is only as good as the session's own `topics`
   taxonomy; sessions with a sparse taxonomy produce a broader, less targeted query.

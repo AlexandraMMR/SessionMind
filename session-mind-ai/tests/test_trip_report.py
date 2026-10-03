@@ -40,7 +40,7 @@ def test_render_markdown_includes_note_text_and_untouched_sessions():
     sections = build_trip_report_sections(make_sessions(), make_notes())
     md = render_markdown(sections, attendee_name="Jane Doe")
 
-    assert "# re:Invent Trip Report — Jane Doe" in md
+    assert "# re:Invent Trip Report: Jane Doe" in md
     assert "Serverless Patterns" in md
     assert "Ask about cold starts follow-up." in md
     assert "Reserved but no notes captured" in md
@@ -75,12 +75,33 @@ def test_render_markdown_includes_real_session_abstract():
     assert "A deep dive into event-driven serverless architectures on AWS." in md
 
 
-def test_render_markdown_omits_abstract_section_when_absent():
-    # s2/s3 have no abstract and no notes in make_notes(), so they're
-    # skipped by render_markdown entirely -- confirm no crash/blank section.
+def test_render_markdown_lists_untouched_sessions_with_their_real_titles():
+    # s2/s3 have no notes in make_notes(), so they land in the "no notes
+    # captured" section rather than getting their own "## " heading.
     sections = build_trip_report_sections(make_sessions(), make_notes())
     md = render_markdown(sections)
-    assert "## Intro to S3" not in md  # untouched sessions list by title only, no heading
+    assert "## Intro to S3" not in md
+    assert "Intro to S3" in md
+    assert "Keynote" in md
+
+
+def test_render_markdown_includes_abstract_for_untouched_sessions_too():
+    # A session with no notes but a real catalog abstract should still
+    # show that abstract in the "Reserved but no notes captured" section,
+    # not just a bare title.
+    sessions = make_sessions()
+    sessions[1].abstract = "An introduction to Amazon S3 storage classes."
+    sections = build_trip_report_sections(sessions, make_notes())
+    md = render_markdown(sections)
+    assert "An introduction to Amazon S3 storage classes." in md
+
+
+def test_render_markdown_handles_untouched_session_with_no_abstract():
+    # s3 ("Keynote") has no abstract at all; should list the title without
+    # crashing or printing a stray blank/None line.
+    sections = build_trip_report_sections(make_sessions(), make_notes())
+    md = render_markdown(sections)
+    assert "**Keynote**" in md
 
 
 def test_render_markdown_includes_attendee_supplied_recording_link():

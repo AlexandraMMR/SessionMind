@@ -220,6 +220,7 @@ def test_generate_builder_center_draft_includes_untouched_sessions(client):
     md = resp.json()["markdown"]
     assert "## Also on the agenda" in md
     assert "Build a cost-effective RAG-based gen AI application" in md
+    assert "A deep dive into retrieval-augmented generation on AWS." in md
 
 
 def test_two_browser_sessions_do_not_share_state(client):

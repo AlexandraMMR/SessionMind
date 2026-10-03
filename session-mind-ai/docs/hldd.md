@@ -1,25 +1,26 @@
-# SessionMind AI — High-Level Design Document
+# SessionMind AI, High-Level Design Document
 
 ## API reality check
 
-### Verified live (ListSessions / GetSession) — as of 2026-10-03
+### Verified live (ListSessions / GetSession), as of 2026-10-03
 
 Confirmed by calling the real, public (no-auth) catalogs of several AWS Summit events
-(`Summit-Toronto-2025` and others) and inspecting the raw JSON — not just paraphrasing the
+(`Summit-Toronto-2025` and others) and inspecting the raw JSON, not just paraphrasing the
 devguide. The real shape differs meaningfully from this module's first draft:
 
-- `ListSessions` returns `{ items: [...], totalCount, nextToken? }` — the array key is
+- `ListSessions` returns `{ items: [...], totalCount, nextToken? }`. The array key is
   **`items`**, not `sessions`.
-- `GetSession` returns `{ session: {...} }` — wrapped, not flat.
-- A real session has: `sessionId`, `title`, `abstract?`, `abbreviation?` (not `sessionCode` — that
-  field does not exist), `type?`, `level?` (a compound string like `"100 – Foundational"`, never
-  a bare number), `isAllDaySession`, `room?` (no separate `venue` field), `sessionTime?: { date,
-  time, length, timezone }` (no `start`/`end` ISO field at all — synthesized by
+- `GetSession` returns `{ session: {...} }`, wrapped, not flat.
+- A real session has: `sessionId`, `title`, `abstract?`, `abbreviation?` (not `sessionCode`; that
+  field does not exist), `type?`, `level?` (a compound string like `"100 – Foundational"`, the
+  API's own literal value, never a bare number), `isAllDaySession`, `room?` (no separate `venue`
+  field), `sessionTime?: { date, time, length, timezone }` (no `start`/`end` ISO field at all,
+  synthesized by
   `events_api_client._derive_session_times`, naive-local arithmetic, not real timezone-aware
   math), `speakers?: [{ name: "Person, Org" }]` (combined strings in dict wrappers, not bare
   strings), and taxonomy as `topics?`, `areas_of_interest?`, `industries?`, `roles?`, `services?`.
-  **There is no `tracks` field anywhere** — corrected in `events_api_client.Session`.
-- `events_api_client.upcoming_reservations` only reads `GetSchedule`'s `reservations` — a
+  **There is no `tracks` field anywhere**; corrected in `events_api_client.Session`.
+- `events_api_client.upcoming_reservations` only reads `GetSchedule`'s `reservations`. A
   favorite is interest, not a commitment to brief (see "devguide-only" caveat below for
   `GetSchedule` itself).
 - `briefing.py` degrades gracefully on missing fields (e.g. "No abstract published yet.") rather
@@ -32,8 +33,8 @@ devguide. The real shape differs meaningfully from this module's first draft:
 ### Devguide-only, NOT verified live (GetSchedule)
 
 `GetSchedule` requires a token for an attendee registered to a specific event. Every event this
-project's test token could reach (`reinvent2025`, `reinvent2026`) returned `403 Forbidden` — a
-valid, unexpired token, correctly rejected as "not registered for this event" (confirmed by
+project's test token could reach (`reinvent2025`, `reinvent2026`) returned `403 Forbidden`. This
+was a valid, unexpired token, correctly rejected as "not registered for this event" (confirmed by
 decoding the JWT and by the documented 401 vs. 403 distinction). **No real `GetSchedule` response
 has been observed.** The `reservations`/`favorites`/`personalTime` array shape and the
 `sessionId`/`startDateTime`/`endDateTime` field names on schedule entries are still based on the
@@ -44,13 +45,13 @@ diverged from the devguide's prose, treat this as a credible best guess, not a c
   separate, pre-existing AWS service, not something we built. We connect to it as an MCP client
   (`knowledge_client.py`). **Verified live**: the real tool name is `aws___search_documentation`
   (the `aws___` prefix, confirmed via `session.list_tools()`), not the bare `search_documentation`
-  name a first reading of its own README might suggest — confirmed by both `scripts/demo.py` and
+  name a first reading of its own README might suggest. Confirmed by both `scripts/demo.py` and
   the `webapp/` demo successfully returning real doc snippets against live traffic.
 
-## System architecture & data flow
+## System architecture and data flow
 
-SessionMind is MCP-primary for interactive use (it is inherently a conversational agent
-surface — briefings and trip reports are naturally requested/consumed through an agent) and
+SessionMind is MCP-primary for interactive use. It is inherently a conversational agent
+surface; briefings and trip reports are naturally requested and consumed through an agent. It is
 REST-backed for its one piece of unattended automation, the periodic briefing worker. See
 ADR-002 for why MCP's per-call sign-in requirement rules it out for that worker.
 
@@ -65,7 +66,7 @@ Pre-session phase (unattended):
 3. GetSession (per upcoming reservation)
         │
         ▼
-4. AWS Knowledge MCP server .search_documentation(topics)   [best-effort, errors swallowed]
+4. AWS Knowledge MCP server .search_documentation(topics)   [best effort, errors swallowed]
         │
         ▼
 5. briefing.build_prep_card()  → 3-bullet card
@@ -103,8 +104,8 @@ Post-session phase (interactive, via our custom MCP server):
 Both `briefing.build_prep_card` and `trip_report.render_markdown` are deterministic string
 templates, not Bedrock invocations. This keeps the "retrieval" half of the RAG pipeline (fetching
 the right session metadata + doc snippets + notes) fully unit-testable without AWS credentials or
-model access. The "generation" half — an actual Bedrock AgentCore call that takes this same
-retrieved context and produces more natural prose — is a documented extension point
+model access. The "generation" half, an actual Bedrock AgentCore call that takes this same
+retrieved context and produces more natural prose, is a documented extension point
 (`briefing.py`'s module docstring references `render_with_bedrock` as the integration seam) rather
 than something faked with hardcoded model output.
 
@@ -112,9 +113,9 @@ than something faked with hardcoded model output.
 
 | Endpoint / tool | Surface | Functionality |
 |---|---|---|
-| `GET /events` | Official REST | `ListEvents` — no auth; used by the web demo to list real, public events to browse |
+| `GET /events` | Official REST | `ListEvents`, no auth; used by the web demo to list real, public events to browse |
 | `GET /events/{eventId}/schedule` | Official REST | Fetches reservations for the briefing worker and MCP tools |
-| `GET /events/{eventId}/sessions` | Official REST | `ListSessions`, paginated — the catalog browsed in the web/CLI demos |
+| `GET /events/{eventId}/sessions` | Official REST | `ListSessions`, paginated; the catalog browsed in the web/CLI demos |
 | `GET /events/{eventId}/sessions/{sessionId}` | Official REST | Deep session metadata for briefings/trip reports |
 | `aws___search_documentation` | Official AWS Knowledge MCP tool | Grounding documentation for prep cards |
 | `get_user_schedule` | Custom MCP tool (ours) | Thin wrapper over `GetSchedule` |
@@ -128,5 +129,5 @@ than something faked with hardcoded model output.
 The web demo (`webapp/server.py`) exposes equivalent functionality as plain REST endpoints
 (`/api/events`, `/api/sessions`, `/api/sessions/{id}/prep-card`, `/api/notes`,
 `/api/reports/{trip-report,linkedin,builder-center}`) rather than MCP tools, since a browser
-can't speak MCP directly — but every one of them calls the same underlying functions listed in
+can't speak MCP directly. Every one of them calls the same underlying functions listed in
 "Component responsibilities" above.
